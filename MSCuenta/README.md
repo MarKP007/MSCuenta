@@ -37,13 +37,13 @@ Esta solución consta de dos proyectos, cliente y cuentas, los cuales siguen un 
 
 1. Clone el repositorio:
 
-git clone git@github.com:MarKP007/Cuentas.git
+git clone git@github.com:MarKP007/MSCuenta.git
 
 1.1 En caso de requerir passphrase coloque "a"
 
 2. Navegar al directorio del proyecto:
 
-cd Cuentas/Cuentas
+cd MSCuenta/MSCuenta
 
 3. Contruir dockerfile para Cuentas:
 
@@ -51,13 +51,13 @@ docker build -t cuentas .
 
 4. Clone el repositorio:
 
-git clone git@github.com:MarKP007/Cliente.git
+git clone git@github.com:MarKP007/MSCliente.git
 
 4.1 En caso de requerir passphrase coloque "a"
 
 5. Navegar al directorio del proyecto:
 
-cd Cliente/Cliente
+cd MSCliente/MSCliente
 
 6. Contruir dockerfile para Cliente:
 
