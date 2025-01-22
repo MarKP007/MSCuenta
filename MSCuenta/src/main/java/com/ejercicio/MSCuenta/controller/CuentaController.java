@@ -20,6 +20,7 @@ import com.ejercicio.MSCuenta.mapstruct.MapStructService;
 import com.ejercicio.MSCuenta.model.Cuenta;
 import com.ejercicio.MSCuenta.model.CuentaDTO;
 import com.ejercicio.MSCuenta.service.CuentaService;
+import com.ejercicio.MSCuenta.utils.CampoEntidad;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
 @RestController
@@ -43,7 +44,7 @@ public class CuentaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<CuentaDTO> obtenerCuentaPorId(@PathVariable("id") long id) {
+	public ResponseEntity<CuentaDTO> obtenerCuentaPorId(@PathVariable(CampoEntidad.ID) long id) {
 		Optional<Cuenta> cuentaData = cuentaService.findById(id);
 		if (cuentaData.isPresent()) {
 			return new ResponseEntity<>(mapStructService.mapCuentaToCuentaDTO(cuentaData.get()), HttpStatus.OK);
@@ -71,7 +72,8 @@ public class CuentaController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<CuentaDTO> updateCuenta(@PathVariable("id") long id, @RequestBody CuentaDTO cuentaDTO) {
+	public ResponseEntity<CuentaDTO> updateCuenta(@PathVariable(CampoEntidad.ID) long id,
+			@RequestBody CuentaDTO cuentaDTO) {
 		Cuenta cuenta = cuentaService.update(id, cuentaDTO);
 		if (cuenta != null) {
 			return new ResponseEntity<>(mapStructService.mapCuentaToCuentaDTO(cuenta), HttpStatus.OK);
@@ -80,7 +82,7 @@ public class CuentaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> eliminarCuenta(@PathVariable("id") long id) {
+	public ResponseEntity<HttpStatus> eliminarCuenta(@PathVariable(CampoEntidad.ID) long id) {
 		try {
 			cuentaService.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.OK);

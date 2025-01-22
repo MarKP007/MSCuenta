@@ -14,6 +14,7 @@ import com.ejercicio.MSCuenta.model.Movimientos;
 import com.ejercicio.MSCuenta.model.MovimientosDTO;
 import com.ejercicio.MSCuenta.repository.CuentaRepository;
 import com.ejercicio.MSCuenta.repository.MovimientoRepository;
+import com.ejercicio.MSCuenta.service.enums.TipoMovimientoEnum;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
 @Service
@@ -60,7 +61,8 @@ public class MovimientoService {
 		}
 		cuentaRepository.save(cuenta);
 
-		String tipoMovimiento = movimiento.getValor() < 0 ? "RETIRO" : "DEPOSITO";
+		String tipoMovimiento = movimiento.getValor() < 0 ? TipoMovimientoEnum.RETIRO.toString()
+				: TipoMovimientoEnum.DEPOSITO.toString();
 		try {
 			Movimientos _movimiento = movimientoRepository.save(new Movimientos(new Date(), tipoMovimiento,
 					movimiento.getValor(), cuenta.getSaldoInicial(), cuenta.getId()));

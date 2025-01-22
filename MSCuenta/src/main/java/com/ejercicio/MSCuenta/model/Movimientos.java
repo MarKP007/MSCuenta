@@ -10,9 +10,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "movimientos")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movimientos {
 
 	@Id
@@ -35,70 +41,12 @@ public class Movimientos {
 	@Column(name = "cuentaid")
 	private long cuentaId;
 
-	public Movimientos() {
-
-	}
-
 	public Movimientos(Date fecha, String tipoMovimiento, double valor, double saldo, long cuentaId) {
 		this.fecha = fecha;
 		this.tipoMovimiento = tipoMovimiento;
 		this.valor = valor;
 		this.saldo = saldo;
 		this.cuentaId = cuentaId;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
-	public String getTipoMovimiento() {
-		return tipoMovimiento;
-	}
-
-	public void setTipoMovimiento(String tipoMovimiento) {
-		this.tipoMovimiento = tipoMovimiento;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-
-	public Double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
-	}
-
-	public long getCuentaId() {
-		return cuentaId;
-	}
-
-	public void setCuentaId(long cuentaId) {
-		this.cuentaId = cuentaId;
-	}
-
-	@Override
-	public String toString() {
-		return "Movimientos [id=" + id + ", fecha=" + fecha + ", tipoMovimiento=" + tipoMovimiento + ", valor=" + valor
-				+ ", saldo=" + saldo + "]";
 	}
 
 }

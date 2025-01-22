@@ -23,6 +23,7 @@ import com.ejercicio.MSCuenta.model.Movimientos;
 import com.ejercicio.MSCuenta.model.MovimientosDTO;
 import com.ejercicio.MSCuenta.service.CuentaService;
 import com.ejercicio.MSCuenta.service.MovimientoService;
+import com.ejercicio.MSCuenta.utils.CampoEntidad;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
 @RestController
@@ -50,7 +51,7 @@ public class MovimientoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<MovimientosDTO> obtenerMovimientoPorId(@PathVariable("id") long id) {
+	public ResponseEntity<MovimientosDTO> obtenerMovimientoPorId(@PathVariable(CampoEntidad.ID) long id) {
 		Optional<Movimientos> movimientoData = movimientoService.findById(id);
 		if (movimientoData.isPresent()) {
 			return new ResponseEntity<>(mapStructService.mapMovimientosToMovimientosDTO(movimientoData.get()),
@@ -72,7 +73,7 @@ public class MovimientoController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<MovimientosDTO> updateMovimiento(@PathVariable("id") long id,
+	public ResponseEntity<MovimientosDTO> updateMovimiento(@PathVariable(CampoEntidad.ID) long id,
 			@RequestBody MovimientosDTO movimientoDTO) {
 		Movimientos movimientos = movimientoService.update(id, movimientoDTO);
 		if (movimientos != null) {
@@ -82,7 +83,7 @@ public class MovimientoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<HttpStatus> eliminarMovimiento(@PathVariable("id") long id) {
+	public ResponseEntity<HttpStatus> eliminarMovimiento(@PathVariable(CampoEntidad.ID) long id) {
 		try {
 			movimientoService.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.OK);
