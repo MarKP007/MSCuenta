@@ -9,8 +9,20 @@ import org.springframework.data.repository.query.Param;
 
 import com.ejercicio.MSCuenta.model.Movimientos;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface MovimientoRepository.
+ */
 public interface MovimientoRepository extends JpaRepository<Movimientos, Long> {
 
+	/**
+	 * Find by id and fecha between.
+	 *
+	 * @param id        the id
+	 * @param startDate the start date
+	 * @param endDate   the end date
+	 * @return the list
+	 */
 	@Query(value = "SELECT m.id, m.fecha, m.tipomovimiento, m.valor, m.saldo, m.cuentaid FROM movimientos m WHERE m.cuentaid = ?1 AND m.fecha BETWEEN ?2 AND ?3", nativeQuery = true)
 	List<Movimientos> findByIdAndFechaBetween(@Param("id") long id, @Param("startDate") Date startDate,
 			@Param("endDate") Date endDate);

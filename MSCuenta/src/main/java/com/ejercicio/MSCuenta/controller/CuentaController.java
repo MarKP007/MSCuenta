@@ -23,16 +23,27 @@ import com.ejercicio.MSCuenta.service.CuentaService;
 import com.ejercicio.MSCuenta.utils.CampoEntidad;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CuentaController.
+ */
 @RestController
 @RequestMapping("/cuentas")
 public class CuentaController {
 
+	/** The cuenta service. */
 	@Autowired
 	CuentaService cuentaService;
 
+	/** The map struct service. */
 	@Autowired
 	MapStructService mapStructService;
 
+	/**
+	 * Obtener todos cuentas.
+	 *
+	 * @return the response entity
+	 */
 	@GetMapping
 	public ResponseEntity<List<CuentaDTO>> obtenerTodosCuentas() {
 		List<Cuenta> cuentas = cuentaService.findAll();
@@ -43,6 +54,12 @@ public class CuentaController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Obtener cuenta por id.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<CuentaDTO> obtenerCuentaPorId(@PathVariable(CampoEntidad.ID) long id) {
 		Optional<Cuenta> cuentaData = cuentaService.findById(id);
@@ -53,6 +70,12 @@ public class CuentaController {
 		}
 	}
 
+	/**
+	 * Gets the cuentas by cliente id.
+	 *
+	 * @param clienteId the cliente id
+	 * @return the cuentas by cliente id
+	 */
 	@GetMapping("/cliente/{clienteId}")
 	public List<CuentaDTO> getCuentasByClienteId(@PathVariable long clienteId) {
 		List<Cuenta> listaCuenta = cuentaService.findByClientId(clienteId);
@@ -62,6 +85,13 @@ public class CuentaController {
 		return EjercicioUtil.convertList(listaCuenta, c -> mapStructService.mapCuentaToCuentaDTO(c));
 	}
 
+	/**
+	 * Crear cuenta.
+	 *
+	 * @param clienteId the cliente id
+	 * @param cuenta    the cuenta
+	 * @return the response entity
+	 */
 	@PostMapping("/{clienteId}")
 	public ResponseEntity<CuentaDTO> crearCuenta(@PathVariable Long clienteId, @RequestBody CuentaDTO cuenta) {
 		Cuenta _cuenta = cuentaService.save(clienteId, cuenta);
@@ -71,6 +101,13 @@ public class CuentaController {
 		return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Update cuenta.
+	 *
+	 * @param id        the id
+	 * @param cuentaDTO the cuenta DTO
+	 * @return the response entity
+	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<CuentaDTO> updateCuenta(@PathVariable(CampoEntidad.ID) long id,
 			@RequestBody CuentaDTO cuentaDTO) {
@@ -81,6 +118,12 @@ public class CuentaController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Eliminar cuenta.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<HttpStatus> eliminarCuenta(@PathVariable(CampoEntidad.ID) long id) {
 		try {
@@ -91,6 +134,12 @@ public class CuentaController {
 		}
 	}
 
+	/**
+	 * Delete by client id.
+	 *
+	 * @param clientId the client id
+	 * @return the response entity
+	 */
 	@DeleteMapping("/cliente/{clientId}")
 	public ResponseEntity<HttpStatus> deleteByClientId(@PathVariable long clientId) {
 		try {

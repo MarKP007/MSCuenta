@@ -9,9 +9,19 @@ import com.ejercicio.MSCuenta.configuration.FeignCuentaConfig;
 import com.ejercicio.MSCuenta.model.ClienteDTO;
 import com.ejercicio.MSCuenta.utils.CampoEntidad;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ToClienteFromCuenta.
+ */
 @FeignClient(name = "Cliente", url = "${cliente_url}", configuration = FeignCuentaConfig.class)
 public interface ToClienteFromCuenta {
 
+	/**
+	 * Gets the client by id.
+	 *
+	 * @param id the id
+	 * @return the client by id
+	 */
 	@GetMapping("/clientes/{id}")
 	ResponseEntity<ClienteDTO> getClientById(@PathVariable(CampoEntidad.ID) long id);
 }

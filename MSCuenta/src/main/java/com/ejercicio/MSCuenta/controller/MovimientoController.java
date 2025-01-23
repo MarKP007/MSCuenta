@@ -26,19 +26,31 @@ import com.ejercicio.MSCuenta.service.MovimientoService;
 import com.ejercicio.MSCuenta.utils.CampoEntidad;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MovimientoController.
+ */
 @RestController
 @RequestMapping("/movimientos")
 public class MovimientoController {
 
+	/** The cuenta service. */
 	@Autowired
 	CuentaService cuentaService;
 
+	/** The movimiento service. */
 	@Autowired
 	MovimientoService movimientoService;
 
+	/** The map struct service. */
 	@Autowired
 	MapStructService mapStructService;
 
+	/**
+	 * Obtener todos movimientos.
+	 *
+	 * @return the response entity
+	 */
 	@GetMapping
 	public ResponseEntity<List<MovimientosDTO>> obtenerTodosMovimientos() {
 		List<Movimientos> movimientos = movimientoService.findAll();
@@ -50,6 +62,12 @@ public class MovimientoController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	/**
+	 * Obtener movimiento por id.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@GetMapping("/{id}")
 	public ResponseEntity<MovimientosDTO> obtenerMovimientoPorId(@PathVariable(CampoEntidad.ID) long id) {
 		Optional<Movimientos> movimientoData = movimientoService.findById(id);
@@ -61,6 +79,13 @@ public class MovimientoController {
 		}
 	}
 
+	/**
+	 * Crear movimiento.
+	 *
+	 * @param cuentaId      the cuenta id
+	 * @param movimientoDTO the movimiento DTO
+	 * @return the response entity
+	 */
 	@PostMapping("/{cuentaId}")
 	public ResponseEntity<MovimientosDTO> crearMovimiento(@PathVariable Long cuentaId,
 			@RequestBody MovimientosDTO movimientoDTO) {
@@ -72,6 +97,13 @@ public class MovimientoController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Update movimiento.
+	 *
+	 * @param id            the id
+	 * @param movimientoDTO the movimiento DTO
+	 * @return the response entity
+	 */
 	@PutMapping("/{id}")
 	public ResponseEntity<MovimientosDTO> updateMovimiento(@PathVariable(CampoEntidad.ID) long id,
 			@RequestBody MovimientosDTO movimientoDTO) {
@@ -82,6 +114,12 @@ public class MovimientoController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
+	/**
+	 * Eliminar movimiento.
+	 *
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<HttpStatus> eliminarMovimiento(@PathVariable(CampoEntidad.ID) long id) {
 		try {
@@ -92,6 +130,14 @@ public class MovimientoController {
 		}
 	}
 
+	/**
+	 * Gets the movimientos.
+	 *
+	 * @param id        the id
+	 * @param startDate the start date
+	 * @param endDate   the end date
+	 * @return the movimientos
+	 */
 	@GetMapping("/movimientos")
 	public List<Movimientos> getMovimientos(@RequestParam long id,
 			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,

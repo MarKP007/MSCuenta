@@ -16,15 +16,26 @@ import com.ejercicio.MSCuenta.repository.CuentaRepository;
 import com.ejercicio.MSCuenta.repository.ToClienteFromCuenta;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CuentaService.
+ */
 @Service
 public class CuentaService {
 
+	/** The cuenta repository. */
 	@Autowired
 	private CuentaRepository cuentaRepository;
 
+	/** The to cliente from cuenta. */
 	@Autowired
 	private ToClienteFromCuenta toClienteFromCuenta;
 
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 */
 	public List<Cuenta> findAll() {
 		try {
 			List<Cuenta> cuentas = new ArrayList<Cuenta>();
@@ -40,10 +51,23 @@ public class CuentaService {
 		}
 	}
 
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 */
 	public Optional<Cuenta> findById(long id) {
 		return cuentaRepository.findById(id);
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param clienteId the cliente id
+	 * @param cuentaDTO the cuenta DTO
+	 * @return the cuenta
+	 */
 	public Cuenta save(Long clienteId, CuentaDTO cuentaDTO) {
 		ResponseEntity<ClienteDTO> clienteDTO;
 		try {
@@ -63,6 +87,13 @@ public class CuentaService {
 		}
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param id        the id
+	 * @param cuentaDTO the cuenta DTO
+	 * @return the cuenta
+	 */
 	public Cuenta update(Long id, CuentaDTO cuentaDTO) {
 		Optional<Cuenta> cuentaData = findById(id);
 
@@ -84,14 +115,30 @@ public class CuentaService {
 		}
 	}
 
+	/**
+	 * Delete by id.
+	 *
+	 * @param id the id
+	 */
 	public void deleteById(long id) {
 		cuentaRepository.deleteById(id);
 	}
 
+	/**
+	 * Find by client id.
+	 *
+	 * @param clienteId the cliente id
+	 * @return the list
+	 */
 	public List<Cuenta> findByClientId(long clienteId) {
 		return cuentaRepository.findByClientId(clienteId);
 	}
 
+	/**
+	 * Delete by client id.
+	 *
+	 * @param clientId the client id
+	 */
 	public void deleteByClientId(long clientId) {
 		cuentaRepository.deleteAll(cuentaRepository.findByClientId(clientId));
 	}

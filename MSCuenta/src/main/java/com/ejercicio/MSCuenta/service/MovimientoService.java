@@ -17,15 +17,26 @@ import com.ejercicio.MSCuenta.repository.MovimientoRepository;
 import com.ejercicio.MSCuenta.service.enums.TipoMovimientoEnum;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MovimientoService.
+ */
 @Service
 public class MovimientoService {
 
+	/** The movimiento repository. */
 	@Autowired
 	private MovimientoRepository movimientoRepository;
 
+	/** The cuenta repository. */
 	@Autowired
 	private CuentaRepository cuentaRepository;
 
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 */
 	public List<Movimientos> findAll() {
 		try {
 			List<Movimientos> movimientos = new ArrayList<Movimientos>();
@@ -42,10 +53,23 @@ public class MovimientoService {
 		}
 	}
 
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 */
 	public Optional<Movimientos> findById(long id) {
 		return movimientoRepository.findById(id);
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param cuentaId   the cuenta id
+	 * @param movimiento the movimiento
+	 * @return the movimientos
+	 */
 	public Movimientos save(Long cuentaId, MovimientosDTO movimiento) {
 		Optional<Cuenta> cuentaeData = cuentaRepository.findById(cuentaId);
 		Cuenta cuenta;
@@ -73,6 +97,13 @@ public class MovimientoService {
 		}
 	}
 
+	/**
+	 * Update.
+	 *
+	 * @param id         the id
+	 * @param movimiento the movimiento
+	 * @return the movimientos
+	 */
 	public Movimientos update(Long id, MovimientosDTO movimiento) {
 		Optional<Movimientos> movimientoData = movimientoRepository.findById(id);
 
@@ -93,10 +124,23 @@ public class MovimientoService {
 		}
 	}
 
+	/**
+	 * Delete by id.
+	 *
+	 * @param id the id
+	 */
 	public void deleteById(long id) {
 		movimientoRepository.deleteById(id);
 	}
 
+	/**
+	 * Find by id and fecha between.
+	 *
+	 * @param id        the id
+	 * @param startDate the start date
+	 * @param endDate   the end date
+	 * @return the list
+	 */
 	public List<Movimientos> findByIdAndFechaBetween(long id, Date startDate, Date endDate) {
 		return movimientoRepository.findByIdAndFechaBetween(id, startDate, endDate);
 	}
