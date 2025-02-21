@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,7 @@ public class Cuenta {
 	private Long clientId;
 
 	/** The numero cuenta. */
+	@NotBlank(message = "El numero de cuenta es obligaorio.")
 	@Column(name = "numerocuenta")
 	private String numeroCuenta;
 
@@ -39,6 +42,7 @@ public class Cuenta {
 	private String tipoCuenta;
 
 	/** The saldo inicial. */
+	@Positive(message = "Debe existir un saldo inicial.")
 	@Column(name = "saldoinicial")
 	private double saldoInicial;
 

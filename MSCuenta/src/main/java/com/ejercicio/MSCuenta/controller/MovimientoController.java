@@ -26,6 +26,8 @@ import com.ejercicio.MSCuenta.service.MovimientoService;
 import com.ejercicio.MSCuenta.utils.CampoEntidad;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
+import jakarta.validation.Valid;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class MovimientoController.
@@ -88,7 +90,7 @@ public class MovimientoController {
 	 */
 	@PostMapping("/{cuentaId}")
 	public ResponseEntity<MovimientosDTO> crearMovimiento(@PathVariable Long cuentaId,
-			@RequestBody MovimientosDTO movimientoDTO) {
+			@Valid @RequestBody MovimientosDTO movimientoDTO) {
 		Movimientos movimiento = movimientoService.save(cuentaId, movimientoDTO);
 		if (movimiento != null) {
 			return new ResponseEntity<>(mapStructService.mapMovimientosToMovimientosDTO(movimiento),

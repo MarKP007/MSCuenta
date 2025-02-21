@@ -23,6 +23,8 @@ import com.ejercicio.MSCuenta.service.CuentaService;
 import com.ejercicio.MSCuenta.utils.CampoEntidad;
 import com.ejercicio.MSCuenta.utils.EjercicioUtil;
 
+import jakarta.validation.Valid;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class CuentaController.
@@ -93,7 +95,7 @@ public class CuentaController {
 	 * @return the response entity
 	 */
 	@PostMapping("/{clienteId}")
-	public ResponseEntity<CuentaDTO> crearCuenta(@PathVariable Long clienteId, @RequestBody CuentaDTO cuenta) {
+	public ResponseEntity<CuentaDTO> crearCuenta(@PathVariable Long clienteId, @Valid @RequestBody CuentaDTO cuenta) {
 		Cuenta _cuenta = cuentaService.save(clienteId, cuenta);
 		if (_cuenta != null) {
 			return new ResponseEntity<>(mapStructService.mapCuentaToCuentaDTO(_cuenta), HttpStatus.CREATED);
